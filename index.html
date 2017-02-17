@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = 'utf-8' >
+		<title>Tetha Brain</title>
+	</head>
+	<body>
+		<form>
+			<input type='text' autofocus />
+		<form>
+		<script src = 'js/CSL/CSL.js'></script> 
+		<script>
+			
+			var oCSL = new CSLclass.CSL( 'GEN' );
+
+			var thug = new CSLclass.CSL ( 'thug' );
+
+			var tab = ['1', '2', 'truc' ];
+			
+			oCSL.aCSLevent ( 'truc' );
+			oCSL.aCSLevent ( 'truc', tab );
+
+			thug.aCSLevent ('je suis trop un thug' );
+
+		</script>
+	</body>
+</html>
