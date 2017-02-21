@@ -6,21 +6,63 @@
 	</head>
 	<body>
 		<form>
-			<input type='text' autofocus />
+			<input id = 'msg' type='text' autofocus />
 		<form>
-		<script src = 'js/CSL/CSL.js'></script> 
+		<script src = 'lib/js/CSL/CSL.js'></script> 
+		<script src = 'lib/js/DPH/DPH.js'></script>
+		<script src = 'lib/js/XHR/XHR.js'></script>
+		<script src = 'lib/js/MSG/MSG.js'></script>
+		<script src = 'lib/js/MSG/PSR.js'></script>
 		<script>
 			
-			var oCSL = new CSLclass.CSL( 'GEN' );
+			var oCSL = new CSLclass.CSL();
+			oCSL.mCSLtoggle();
+			var oDPH = new DPHclass.DPH();
+			var oMSG = new MSGclass.MSG();				
+			var oPSR = new PSRclass.PSR();
+			oPSR.setup ();
 
-			var thug = new CSLclass.CSL ( 'thug' );
+			// premiers tests pour les messages retours :
+			// protection minimale du texte
+			// majuscules sur tous les caratcères qui en ont besoin
+			oMSG.write ( 'un premier test');
+			oMSG.write ( '' ); // output : nothing to write
+			// messages multiline avec pauses
+			var lignes = ['une première phrase,', 'une seconde,', 'une troisème.']
+			oMSG.multiline (lignes, 1000); // pause de 1s.
 
-			var tab = ['1', '2', 'truc' ];
-			
-			oCSL.aCSLevent ( 'truc' );
-			oCSL.aCSLevent ( 'truc', tab );
+			//----------------------------------------------------------
 
-			thug.aCSLevent ('je suis trop un thug' );
+			oDPH.aDPHlistener ( 'PSRCOMPLETE', matchall, this );
+
+			// parser pour checker le contenu d'une phrase
+			// chaque pattern trouvé est stocké avec sa récurrence et le numéro du pattern qui a matché
+			// sous la forme d'un objet
+			// pour l'instant, reconnaît les pronoms,
+			// 4 verbes dans 5 temps (infinitif, présent, imparfait, futur, participe passé)
+			// et les signes de ponctuation finaux (.!?)
+			// facilement évolutif : juste un fichier à modifier avec une structure unique
+
+			// pour plus de flexibilité, la sortie est numérique :
+			// par exemple avec :
+			// "pronouns":{"0":{"ratio":{"0":1}},"1":{"ratio":{"0":1}}} 
+			//
+			// -> il y a des pronoms
+			// -> 2 occurences : 0 et 1, qui correspond à "je" et "tu"
+			// -> avec un ratio respectif de 1 pour chaque
+
+			// les phrases test, modifie les comme tu veux pour tester
+			content = "j'ai pu entrer ici !";
+			content2 = "Je veux bien un café, si tu veux bien ?";
+
+			function matchall () {
+
+				oPSR.matchall ( content );	
+				oPSR.matchall ( content2 );
+
+			}
+
+			// toutes les sorties se font dans la console !
 
 		</script>
 	</body>

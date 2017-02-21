@@ -1,0 +1,49 @@
+{
+"pronouns" :  
+	[ { "pattern" : [ "j['e]{1}", "y" ] },
+	  { "pattern" : [ "tu" ] },
+	  { "pattern" : [ "il" ] },
+	  { "pattern" : [ "elle" ] },
+	  { "pattern" : [ "nous" ] },
+	  { "pattern" : [ "vous" ] },
+	  { "pattern" : [ "ils" ] },
+	  { "pattern" : [ "elles" ] }
+	],
+"verbs" :
+	[
+		{ "pattern" : [ 
+				"\\bavoir\\b",
+				"\\b[ao][is]?[eonstvz]{0,4}\\b",
+				"\\bava?i[eonstz]{0,3}\\b",
+				"\\baur[aeo][instz]{0,2}\\b",
+				"\\beu\\b"
+			] },
+		{ "pattern" : [ 
+				"\\b[eê]tre\\b",
+				"\\bs(uis|om+es|ont)|[eê](st?|tes)\\b",
+				"\\b[eé]ta?i(on|e)?n?[stz]\\b",
+				"\\bser[aeo][instz]{0,2}\\b",
+				"\\b[eé]t[eé]\\b"
+			] },
+		{ "pattern" : [ 
+				"\\bvouloir\\b",
+				"\\bv(eu|ou)[xtl]?[eonstz]{0,3}\\b",
+				"\\bvoula?i[eonstz]{1,3}\\b",
+				"\\bvoudr[aeo][instz]{0,2}\\b",
+				"\\bvoulu\\b"
+			] },
+		{ "pattern" : [ 
+				"\\bpouvoir\\b",
+				"\\bp[eo]u[tx|v][eonstz]*\\b",
+				"\\bpouv[a]?i[eonstz]{1,3}\\b",
+				"\\bpourr[aeo][instz]{0,2}\\b",
+				"\\bpu\\b"
+			] }
+
+	],
+"punctuation" : 
+	[ { "pattern" : [ "\\." ] },
+      { "pattern" : [ "\\!+" ] },
+      { "pattern" : [ "\\?+" ] }
+	]
+}
