@@ -13,56 +13,42 @@
 		<script src = 'lib/js/XHR/XHR.js'></script>
 		<script src = 'lib/js/MSG/MSG.js'></script>
 		<script src = 'lib/js/MSG/PSR.js'></script>
+		<script src = 'lib/js/MSG/MKV.js'></script>
 		<script>
 			
 			var oCSL = new CSLclass.CSL();
 			oCSL.mCSLtoggle();
-			var oDPH = new DPHclass.DPH();
-			var oMSG = new MSGclass.MSG();				
-			var oPSR = new PSRclass.PSR();
-			oPSR.setup ();
+			//var oDPH = new DPHclass.DPH();
+			//var oMSG = new MSGclass.MSG();				
+			//var oPSR = new PSRclass.PSR();
+			//oPSR.setup ();
 
-			// premiers tests pour les messages retours :
-			// protection minimale du texte
-			// majuscules sur tous les caratcères qui en ont besoin
-			oMSG.write ( 'un premier test');
-			oMSG.write ( '' ); // output : nothing to write
-			// messages multiline avec pauses
-			var lignes = ['une première phrase,', 'une seconde,', 'une troisème.']
-			oMSG.multiline (lignes, 1000); // pause de 1s.
+			//oMSG.write ( 'un premier test');
+			//oMSG.write ( '' ); // output : nothing to write
+			//var lignes = ['une première phrase,', 'une seconde,', 'une troisème.']
+			//oMSG.multiline (lignes, 1000); // pause de 1s.
 
-			//----------------------------------------------------------
+			//oDPH.aDPHlistener ( 'PSRCOMPLETE', matchall, this );
 
-			oDPH.aDPHlistener ( 'PSRCOMPLETE', matchall, this );
+			//content = "j'ai pu entrer ici !";
+			//content2 = "Je veux bien un café, si tu veux bien ?";
 
-			// parser pour checker le contenu d'une phrase
-			// chaque pattern trouvé est stocké avec sa récurrence et le numéro du pattern qui a matché
-			// sous la forme d'un objet
-			// pour l'instant, reconnaît les pronoms,
-			// 4 verbes dans 5 temps (infinitif, présent, imparfait, futur, participe passé)
-			// et les signes de ponctuation finaux (.!?)
-			// facilement évolutif : juste un fichier à modifier avec une structure unique
+			//function matchall () {
 
-			// pour plus de flexibilité, la sortie est numérique :
-			// par exemple avec :
-			// "pronouns":{"0":{"ratio":{"0":1}},"1":{"ratio":{"0":1}}} 
-			//
-			// -> il y a des pronoms
-			// -> 2 occurences : 0 et 1, qui correspond à "je" et "tu"
-			// -> avec un ratio respectif de 1 pour chaque
+			//	oPSR.matchall ( content );	
+			//	oPSR.matchall ( content2 );
 
-			// les phrases test, modifie les comme tu veux pour tester
-			content = "j'ai pu entrer ici !";
-			content2 = "Je veux bien un café, si tu veux bien ?";
+			//}
 
-			function matchall () {
+			const oMKV = new MKVclass.MKV();
 
-				oPSR.matchall ( content );	
-				oPSR.matchall ( content2 );
+			const text = "Une forêt, à première vue. Je ne distingue pas bien ce qu'il se passe. Et ce brouillard étouffe ma vision. Tout semble mort. Seulement de larges troncs noirs qui se cachent les uns les autres. Et mon souffle qui résonne dans ma poitrine. Je n'arrive pas à me calmer, alors que rien n'arrive. Je fais quelques pas, mais rien ne change. C'est une forêt. Quelques rayons qui parviennent parfois à percer le feuillage diffusent leur lumière dans le brouillard. Tout est si calme, c'en est oppressant. Et si beau. Nous ne pouvons pas être tout seuls.";
 
-			}
-
-			// toutes les sorties se font dans la console !
+			oMKV.setMaxLength ( 1 );
+			oMKV.setChainLength ( 3 );
+			oMKV.add ( text );
+			const sentences = oMKV.getSentences ( 7, 'Je', 2, 1 );
+			console.log ( JSON.stringify(sentences) );
 
 		</script>
 	</body>
